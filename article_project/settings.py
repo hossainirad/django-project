@@ -136,6 +136,6 @@ EMAIL_PORT = 1025
 
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
