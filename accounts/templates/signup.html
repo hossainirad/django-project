@@ -1,0 +1,57 @@
+{% extends 'base_layout.html' %}
+
+
+
+{% block content %}
+    <h2>
+    sign up
+    </h2>
+
+    <form class="container" method="post" novalidate>
+      {% csrf_token %}
+
+      {{ form.non_field_errors }}
+
+
+      {% for hidden_field in form.hidden_fields %}
+        {% if hidden_field.errors %}
+          <ul>
+            {% for error in hidden_field.errors %}
+              <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {{ hidden_field }}
+      {% endfor %}
+
+
+      <div class="container-of-div">
+        {% for field in form.visible_fields %}
+          <div>
+            <span>{{ field.label_tag }}</span>
+            <div class="any-field">
+              {% if field.errors %}
+                <ul>
+                  {% for error in field.errors %}
+                    <li class="error-massage">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {{ field }}
+              {% if field.help_text %}
+                {% if field.name != 'password1' and field.name != 'password2'  %}
+                  <br /><span class="help-text">{{ field.help_text }}</span>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+{#    ------------------------------------------------------------    #}
+
+
+
+
+      <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+{% endblock %}

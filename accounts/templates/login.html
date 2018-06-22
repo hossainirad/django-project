@@ -1,0 +1,58 @@
+{% extends 'base_layout.html' %}
+
+
+{% block content %}
+    <h2 class="py-3">
+    log in
+    </h2>
+    <div class="container my-5 mx-5">
+    <form class="form-class" action={% url 'accounts:login' %} method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for hidden_field in form.hidden_fields %}
+      {% if hidden_field.errors %}
+        <ul>
+          {% for error in hidden_field.errors %}
+            <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {{ hidden_field }}
+    {% endfor %}
+
+
+
+    <div class="container-of-div">
+      {% for field in form.visible_fields %}
+        <div>
+          <span>{{ field.label_tag }}</span>
+          <div class="any-field">
+            {% if field.errors %}
+              <ul>
+                {% for error in field.errors %}
+                  <li class="error-massage">{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {{ field }}
+            {% if field.help_text %}
+              {% if field.name != 'password1' and field.name != 'password2'  %}
+                <br /><span class="help-text">{{ field.help_text }}</span>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+
+
+
+    {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+    {% endif %}
+    <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}Article title{% endblock %}
+
+{% block content %}
+    <h1 class="text-white bg-dark">
+        this is Article list page.
+    </h1>
+
+    <div class="article-container">
+        {% for article in articles %}
+            <div class="article border border-dark mx-2 my-3">
+                <h2>
+                    <a href="#">{{ article.title }}</a>
+                </h2>
+                <p class="text-secondary px-2 py-1">
+                    {{ article.snippet }}<a class="btn-default" href="{% url 'articles:article_detail' slug=article.slug %}"> ... continue</a>
+                </p>
+            <p class="text-secondary px-2 py-1">
+                {{ article.date }}
+            </p>
+            
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="d-b calendar colM vBigIntegerField"></div>

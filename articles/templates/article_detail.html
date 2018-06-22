@@ -1,0 +1,10 @@
+{% extends 'article_list.html' %}
+{% block content %}
+    <div class="article_detail my-3 container py-3">
+        <div class="individual_article">
+            <h2>{{ articles.title }}</h2>
+            <p class="my-5">{{ articles.body }}</p>
+            <p>{{ articles.date }}</p>
+        </div>
+    </div>
+{% endblock %}
